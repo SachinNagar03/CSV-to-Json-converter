@@ -1,0 +1,116 @@
+/* ===== JSON TREE – PREMIUM DEV STYLE ===== */
+
+.json-tree-card {
+  margin-top: 2rem;
+  padding: 1.75rem;
+  border-radius: 1.25rem;
+  background: linear-gradient(180deg, #18181b, #111113);
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  box-shadow:
+    0 0 60px rgba(139, 92, 246, 0.18),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13.5px;
+  color: #e5e7eb;
+  overflow-x: auto;
+  width: 40%;
+}
+
+/* ===== TREE ITEMS ===== */
+
+.tree-item {
+  margin-left: 14px;
+  padding: 4px 0;
+  line-height: 1.7;
+  position: relative;
+}
+
+/* ===== OBJECT KEY (expandable) ===== */
+
+.tree-key {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #c4b5fd;
+  transition: all 0.2s ease;
+}
+
+.tree-key:hover {
+  color: #a78bfa;
+  background: rgba(139, 92, 246, 0.08);
+  border-radius: 6px;
+  padding: 2px 4px;
+}
+
+/* Arrow animation */
+.arrow {
+  font-size: 12px;
+  color: #8b5cf6;
+  transition: transform 0.2s ease;
+}
+
+.arrow.open {
+  transform: rotate(90deg);
+}
+
+/* ===== CHILD CONTAINER ===== */
+
+.tree-children {
+  margin-left: 18px;
+  padding-left: 12px;
+  border-left: 1px dashed rgba(139, 92, 246, 0.35);
+  animation: fadeIn 0.2s ease;
+}
+
+/* ===== PRIMITIVE KEYS & VALUES ===== */
+
+.key {
+  color: #60a5fa;
+  font-weight: 500;
+}
+
+.colon {
+  margin: 0 4px;
+  color: #71717a;
+}
+
+.value {
+  color: #f9fafb;
+  word-break: break-word;
+}
+
+/* ===== ANIMATION ===== */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== SCROLLBAR (DESKTOP) ===== */
+
+.json-tree-card::-webkit-scrollbar {
+  height: 6px;
+}
+
+.json-tree-card::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.4);
+  border-radius: 4px;
+}
+
+/* ===== MOBILE ===== */
+
+@media (max-width: 640px) {
+  .json-tree-card {
+    padding: 1.25rem;
+    font-size: 12.5px;
+    width: 100%;
+  }
+}
