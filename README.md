@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CSV-to-JSON Transformer – Frontend
 
-## Getting Started
+This is the frontend part of the “CSV-to-JSON Live Transformer” application.
+It is built using **Next.js (JavaScript)** with normal CSS and is optimized for
+mobile-first usage.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Overall Architecture & Assumptions
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- The frontend is responsible for:
+  - Allowing users to upload a CSV file
+  - Sending the file to the backend via an API request
+  - Receiving structured JSON from the backend
+  - Rendering the JSON as a collapsible / expandable tree view
+- The backend exposes a single API endpoint for CSV upload and JSON response
+- The frontend assumes the backend returns valid structured JSON
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## JSON Rendering Approach
 
-## Learn More
+- The JSON response is rendered using a **recursive React component**
+- This approach allows rendering JSON of **any depth**
+- Each object or array key can be expanded or collapsed
+- Designed to be readable and usable on small (mobile) screens
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## UI & UX Considerations
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Mobile-first layout
+- Click/tap-based expand and collapse
+- Simple styling using normal CSS
+- Clear visual hierarchy for nested JSON keys
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Setup & Run Instructions
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Prerequisites
+- Node.js (v18 or above recommended)
+- npm or yarn
+
+### Steps to Run Locally
+
+1. Install dependencies :
+   ```bash
+   npm install
+2. Install dependencies :
+   ```bash
+   npm run dev
+3.Open the application in the browser :
+   ```bash
+   http://localhost:3000
+
+Note: Ensure the backend server is running and accessible before uploading a CSV file.
+
