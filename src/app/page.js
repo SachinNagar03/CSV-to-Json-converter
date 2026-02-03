@@ -6,38 +6,23 @@ import JsonTree from "./components/JsonTree";
 export default function Home() {
   const [data, setData] = useState(null);
   const [file, setFile] = useState(null);
-  const [isDragging, setIsDragging] = useState(false);
   const [status, setStatus] = useState("idle");
   const [loading, setLoading] = useState(false);
+
   const fileInputRef = useRef(null);
 
-  const handleDragOver = (e) => {
-    e.preventDefault();
-    setIsDragging(true);
-  };
-
-  const handleDragLeave = () => setIsDragging(false);
-
-  const handleDrop = (e) => {
-    e.preventDefault();
-    setIsDragging(false);
-    const droppedFile = e.dataTransfer.files[0];
-    if (droppedFile?.name.endsWith(".csv")) {
-      setFile(droppedFile);
+  // ---------- File Select ----------
+  const handleFileSelect = (e) => {
+    const selectedFile = e.target.files?.[0];
+    if (selectedFile && selectedFile.name.endsWith(".csv")) {
+      setFile(selectedFile);
       setStatus("idle");
     } else {
       setStatus("error");
     }
   };
 
-  const handleFileSelect = (e) => {
-    const selectedFile = e.target.files?.[0];
-    if (selectedFile) {
-      setFile(selectedFile);
-      setStatus("idle");
-    }
-  };
-
+  // ---------- Upload ----------
   const handleUpload = async () => {
     if (!file) return;
 
@@ -47,22 +32,33 @@ export default function Home() {
     setLoading(true);
     setStatus("idle");
 
-    const res = await fetch("http://localhost:5000/upload", {
-      method: "POST",
-      body: formData,
-    });
+    try {
+      const res = await fetch(
+        "https://csv-to-json-backend-b5wd.onrender.com/upload",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
-    const result = await res.json();
-    setData(result);
-
-    setLoading(false);
-    setStatus("success");
+      const result = await res.json();
+      setData(result);
+      setStatus("success");
+    } catch (err) {
+      console.error(err);
+      setStatus("error");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const clearFile = () => {
     setFile(null);
     setData(null);
     setStatus("idle");
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
   };
 
   return (
@@ -70,6 +66,7 @@ export default function Home() {
       <div className="ambient-glow glow-1" />
       <div className="ambient-glow glow-2" />
 
+      {/* ---------- Header ---------- */}
       <div className="header-section">
         <div className="badge">
           <span>CSV Tool</span>
@@ -78,12 +75,10 @@ export default function Home() {
         <p className="subtitle">Upload CSV and view JSON structure</p>
       </div>
 
+      {/* ---------- Card ---------- */}
       <div className="card">
         <div
-          className={`drop-zone ${isDragging ? "dragging" : ""}`}
-          onDragOver={handleDragOver}
-          onDragLeave={handleDragLeave}
-          onDrop={handleDrop}
+          className="drop-zone"
           onClick={() => fileInputRef.current?.click()}
         >
           <input
@@ -95,15 +90,17 @@ export default function Home() {
           />
 
           <div className="drop-content">
-            <p className="drop-title">Drop CSV file here</p>
-            <p className="drop-subtitle">or click to browse</p>
+            <p className="drop-title">Click to select CSV file</p>
+            <p className="drop-subtitle">Only .csv files are supported</p>
           </div>
         </div>
 
         {file && (
           <div className="file-info">
             <span className="file-name">{file.name}</span>
-            <button onClick={clearFile} className="clear-btn">✕</button>
+            <button onClick={clearFile} className="clear-btn">
+              ✕
+            </button>
           </div>
         )}
 
@@ -112,7 +109,7 @@ export default function Home() {
           disabled={!file || loading}
           className="upload-btn"
         >
-          {loading ? "Uploading..." : "Upload File"}
+          {loading ? "Converting..." : "Convert to json"}
         </button>
 
         {status === "error" && (
@@ -128,6 +125,7 @@ export default function Home() {
         )}
       </div>
 
+      {/* ---------- JSON Tree ---------- */}
       {data && <JsonTree data={data} />}
     </div>
   );
