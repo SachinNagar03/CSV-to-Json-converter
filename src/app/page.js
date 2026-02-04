@@ -1,6 +1,6 @@
 "use client";
 import { useState, useRef } from "react";
-import "./design2.css";
+import "./page.css";
 import JsonTree from "./components/JsonTree";
 
 export default function Home() {
