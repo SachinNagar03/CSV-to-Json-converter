@@ -44,11 +44,13 @@ a {
 .loader-overlay {
   position: fixed;
   inset: 0;
-
-  background: rgba(8, 10, 18, 0.858);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(10px);
-
+ 
+  /* From https://css.glass */
+background: rgba(0, 0, 0, 0.66);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(20px);
+-webkit-backdrop-filter: blur(20px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -60,8 +62,9 @@ a {
 .loader-card {
   padding: 32px 36px;
   border-radius: 16px;
-
-  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.454);
   border: 1px solid rgba(255, 255, 255, 0.08);
 
   display: flex;
@@ -91,8 +94,8 @@ a {
 .loader-text {
   font-size: 14px;
   letter-spacing: 0.3px;
-  color: rgba(255, 255, 255, 0.75);
-  animation: pulse 1.6s ease-in-out infinite;
+  color: rgb(255, 255, 255);
+  
 }
 
 /* Animations */
@@ -102,14 +105,3 @@ a {
   }
 }
 
-@keyframes pulse {
-  0% {
-    opacity: 0.4;
-  }
-  50% {
-    opacity: 0.9;
-  }
-  100% {
-    opacity: 0.4;
-  }
-}

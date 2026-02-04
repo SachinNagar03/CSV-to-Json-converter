@@ -64,6 +64,8 @@ export default function Home() {
 
   return (
     <div className="page-container">
+      {loading && <Loader />}
+
       <div className="ambient-glow glow-1" />
       <div className="ambient-glow glow-2" />
 
@@ -110,7 +112,9 @@ export default function Home() {
           disabled={!file || loading}
           className="upload-btn"
         >
-          {loading ? <Loader message="Please wait… this process may take time" /> : "Convert to json"}
+          {loading ? "converting..." : "Convert to json"}
+        
+        
         </button>
 
         {status === "error" && (
@@ -121,7 +125,7 @@ export default function Home() {
 
         {status === "success" && (
           <div className="message success">
-            File uploaded successfully
+            File converted successfully
           </div>
         )}
       </div>

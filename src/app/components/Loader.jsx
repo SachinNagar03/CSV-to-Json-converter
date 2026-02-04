@@ -1,4 +1,4 @@
-export default function Loader({ message = "Processing… this may take a moment" }) {
+export default function Loader({ message = "Processing… this may take a moment for first time" }) {
   return (
     <div className="loader-overlay">
       <div className="loader-card">
