@@ -40,3 +40,76 @@ a {
     color-scheme: dark;
   }
 }
+
+.loader-overlay {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(8, 10, 18, 0.858);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(10px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 9999;
+}
+
+/* Glass card */
+.loader-card {
+  padding: 32px 36px;
+  border-radius: 16px;
+
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    inset 0 0 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Premium glowing spinner */
+.loader-ring {
+  width: 52px;
+  height: 52px;
+
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: #4f8cff;
+
+  animation: spin 1s linear infinite;
+  box-shadow: 0 0 18px rgba(79, 140, 255, 0.6);
+}
+
+/* Text styling */
+.loader-text {
+  font-size: 14px;
+  letter-spacing: 0.3px;
+  color: rgba(255, 255, 255, 0.75);
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+/* Animations */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0.4;
+  }
+}

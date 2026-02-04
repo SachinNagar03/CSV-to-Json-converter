@@ -2,6 +2,7 @@
 import { useState, useRef } from "react";
 import "./page.css";
 import JsonTree from "./components/JsonTree";
+import Loader from "./components/Loader";
 
 export default function Home() {
   const [data, setData] = useState(null);
@@ -109,7 +110,7 @@ export default function Home() {
           disabled={!file || loading}
           className="upload-btn"
         >
-          {loading ? "Converting..." : "Convert to json"}
+          {loading ? <Loader message="Please wait… this process may take time" /> : "Convert to json"}
         </button>
 
         {status === "error" && (
